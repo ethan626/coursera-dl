@@ -111,7 +111,7 @@ def list_courses(args):
     logging.info('Found %d courses', len(courses))
     for course in courses:
         logging.info(course)
-
+    return courses              # Ethan:Return course list so we can use them all later 
 
 def download_on_demand_class(session, args, class_name):
     """
@@ -237,7 +237,9 @@ def main():
     if args.specialization:
         args.class_names = expand_specializations(session, args.class_names)
 
-    for class_index, class_name in enumerate(args.class_names):
+    # for class_index, class_name in enumerate(args.class_names):
+    all_courses = list_courses(args) # Ethan: Get every course the bot is signed up for 
+    for class_index, class_name in enumerate(all_courses):
         try:
             logging.info('Downloading class: %s (%d / %d)',
                          class_name, class_index + 1, len(args.class_names))
